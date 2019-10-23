@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Cms.Email</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Cms.Email.EmailMessage">
+            <summary>
+            Provides a database persistable representation of an email object
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.Attachments">
+            <summary>
+            A list of Database Files attached to this message
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.BCCRecipients">
+            <summary>
+            A ; delimited list of BCC recipients
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.Body">
+            <summary>
+            The HTML body of the email message
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.CCRecipients">
+            <summary>
+            A ; delimited list of CC recipients
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.From">
+            <summary>
+            A string representing the account the email should be sent from, used when gathering connection information. Blank sends from default
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.IsHtml">
+            <summary>
+            All messages are HTML by default. Set to false to override
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.Label">
+            <summary>
+            An internal label for associating emails with the process that created them
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.Recipients">
+            <summary>
+            A ; delimited list of Message recipients
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.SendDate">
+            <summary>
+            The date the email message should be sent on. Defaults to the current time
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.State">
+            <summary>
+            The sent state of the message as persisted
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.EmailMessage.Subject">
+            <summary>
+            The subject to send the message with
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Email.Extensions.EmailMessageExtensions.AddAttachment(Penguin.Cms.Email.EmailMessage,System.String,System.String)">
+            <summary>
+            Adds a file as an attachment to the message, persists it as a database file
+            </summary>
+            <param name="filePath">The path of the file to add</param>
+            <param name="fileName">The name to give the attachment</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Extensions.EmailMessageExtensions.AddAttachment(Penguin.Cms.Email.EmailMessage,System.Byte[],System.String)">
+            <summary>
+            Adds a file as an attachment to the message, persists it as a database file
+            </summary>
+            <param name="bytes">A byte[] representing the file contents</param>
+            <param name="fileName">The name to give the attachment</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Extensions.EmailMessageExtensions.AddAttachment(Penguin.Cms.Email.EmailMessage,Penguin.Cms.Files.DatabaseFile)">
+            <summary>
+            Adds an existing database file as an attachment to the message
+            </summary>
+            <param name="db">The database file to add as an attachment</param>
+        </member>
+        <member name="T:Penguin.Cms.Email.Services.EmailService">
+            <summary>
+            A service used to send/queue/persist new email messages
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Email.Services.EmailService.EmailRepository">
+            <summary>
+            The IRepository implementation to be used when persisting the message
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Email.Services.EmailService.#ctor(Penguin.Persistence.Abstractions.Interfaces.IRepository{Penguin.Cms.Email.EmailMessage},Penguin.Configuration.Abstractions.Interfaces.IProvideConfigurations)">
+            <summary>
+            Constructs a new instance of this service
+            </summary>
+            <param name="emailRepository">The IRepository implementation to be used when persisting the message</param>
+            <param name="configurationProvider">A Configuration provider to use to retrieve email message configurations</param>
+            <param name="messageBus">An optonal message bus to be used for publishing email related messages</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Services.EmailService.Queue(Penguin.Cms.Email.EmailMessage)">
+            <summary>
+            Queues a new email message by adding it to the IRepository implementation with the intent of being sent later by a worker
+            </summary>
+            <param name="message">The message to queue</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Services.EmailService.QueueAndSend(Penguin.Cms.Email.EmailMessage)">
+            <summary>
+            Persists the email message to the IRepository implementation and attempts to send it immediately bypassing any queue
+            </summary>
+            <param name="message">The message to send/persist</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Services.EmailService.QueueOrSend(Penguin.Cms.Email.EmailMessage)">
+            <summary>
+            Calls Queue as the default
+            </summary>
+            <param name="message">Queues the message</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Services.EmailService.ReQueue(Penguin.Cms.Email.EmailMessage,System.String)">
+            <summary>
+            Copies the provided message and requeues it with an optional new recipient
+            </summary>
+            <param name="message">The message to copy</param>
+            <param name="newRecipient">If not null, the value will replace the former recipient</param>
+        </member>
+        <member name="M:Penguin.Cms.Email.Services.EmailService.ReQueueAndSend(Penguin.Cms.Email.EmailMessage,System.String)">
+            <summary>
+            Copies the provided message and requeues it with an optional new recipient, marks it sent, and then immediately sends it
+            </summary>
+            <param name="message">The message to copy</param>
+            <param name="newRecipient">If not null, the value will replace the former recipient</param>
+        </member>
+    </members>
+</doc>
