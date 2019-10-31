@@ -36,7 +36,7 @@ namespace Penguin.Cms.Email.Services
         /// <param name="message">The message to queue</param>
         public void Queue(EmailMessage message) => EmailRepository.AddOrUpdate(message);
 
-        void IQueueMail.Queue(IEmailMessage message) => Queue(new EmailMessage(message));
+        void IQueueMail.Queue(IEmailMessage message) => Queue(EnsureEntity(message));
 
         /// <summary>
         /// Persists the email message to the IRepository implementation and attempts to send it immediately bypassing any queue
@@ -49,7 +49,7 @@ namespace Penguin.Cms.Email.Services
             Send(message);
         }
 
-        void IQueueAndSendMail.QueueAndSend(IEmailMessage message) => QueueAndSend(new EmailMessage(message));
+        void IQueueAndSendMail.QueueAndSend(IEmailMessage message) => QueueAndSend(EnsureEntity(message));
 
         /// <summary>
         /// Calls Queue as the default
@@ -57,7 +57,7 @@ namespace Penguin.Cms.Email.Services
         /// <param name="message">Queues the message</param>
         public void QueueOrSend(EmailMessage message) => Queue(message);
 
-        void IQueueAndSendMail.QueueOrSend(IEmailMessage message) => QueueOrSend(new EmailMessage(message));
+        void IQueueAndSendMail.QueueOrSend(IEmailMessage message) => QueueOrSend(EnsureEntity(message));
 
         /// <summary>
         /// Copies the provided message and requeues it with an optional new recipient
@@ -66,7 +66,7 @@ namespace Penguin.Cms.Email.Services
         /// <param name="newRecipient">If not null, the value will replace the former recipient</param>
         public void ReQueue(EmailMessage message, string newRecipient = null) => Queue(CopyMessage(message, newRecipient));
 
-        void IQueueMail.ReQueue(IEmailMessage message, string newRecipient = null) => ReQueue(new EmailMessage(message), newRecipient);
+        void IQueueMail.ReQueue(IEmailMessage message, string newRecipient = null) => ReQueue(EnsureEntity(message), newRecipient);
 
         /// <summary>
         /// Copies the provided message and requeues it with an optional new recipient, marks it sent, and then immediately sends it
@@ -75,7 +75,7 @@ namespace Penguin.Cms.Email.Services
         /// <param name="newRecipient">If not null, the value will replace the former recipient</param>
         public void ReQueueAndSend(EmailMessage message, string newRecipient = null) => QueueAndSend(CopyMessage(message, newRecipient, EmailMessageState.Success));
 
-        void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient = null) => ReQueueAndSend(new EmailMessage(message), newRecipient);
+        void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient = null) => ReQueueAndSend(EnsureEntity(message), newRecipient);
 
         private EmailMessage CopyMessage(EmailMessage message, string newRecipient = null, EmailMessageState state = EmailMessageState.Unsent)
         {
@@ -89,6 +89,17 @@ namespace Penguin.Cms.Email.Services
             }
 
             return toReturn;
+        }
+
+        private EmailMessage EnsureEntity(IEmailMessage source)
+        {
+            if(source is EmailMessage e)
+            {
+                return e;
+            } else
+            {
+                return new EmailMessage(source);
+            }
         }
     }
 }

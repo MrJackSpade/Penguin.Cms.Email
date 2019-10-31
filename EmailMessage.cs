@@ -34,7 +34,7 @@ namespace Penguin.Cms.Email
         /// A ; delimited list of BCC recipients
         /// </summary>
         [Display(Order = -600)]
-        public string BCCRecipients { get; set; }
+        public string BCCRecipients { get; set; } = string.Empty;
 
         /// <summary>
         /// The HTML body of the email message
@@ -42,7 +42,7 @@ namespace Penguin.Cms.Email
         [Display(Order = -400)]
         [DisplayType("System.String.Html")]
         [DontAllow(DisplayContexts.List)]
-        public virtual string Body { get; set; }
+        public virtual string Body { get; set; } = string.Empty;
 
         IEnumerable<string> IEmailMessage.CCRecipients => this.GetCCRecipients();
 
@@ -50,14 +50,14 @@ namespace Penguin.Cms.Email
         /// A ; delimited list of CC recipients
         /// </summary>
         [Display(Order = -700)]
-        public string CCRecipients { get; set; }
+        public string CCRecipients { get; set; } = string.Empty;
 
         /// <summary>
         /// A string representing the account the email should be sent from, used when gathering connection information. Blank sends from default
         /// </summary>
         [Display(Order = -900)]
         [DontAllow(DisplayContexts.List)]
-        public string From { get; set; }
+        public string From { get; set; } = string.Empty;
 
         /// <summary>
         /// All messages are HTML by default. Set to false to override
@@ -67,7 +67,7 @@ namespace Penguin.Cms.Email
         /// <summary>
         /// An internal label for associating emails with the process that created them
         /// </summary>
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
         IEnumerable<string> IEmailMessage.Recipients => this.GetRecipients();
 
@@ -75,7 +75,7 @@ namespace Penguin.Cms.Email
         /// A ; delimited list of Message recipients
         /// </summary>
         [Display(Order = -800)]
-        public string Recipients { get; set; }
+        public string Recipients { get; set; } = string.Empty;
 
         /// <summary>
         /// The date the email message should be sent on. Defaults to the current time
@@ -92,7 +92,7 @@ namespace Penguin.Cms.Email
         /// The subject to send the message with
         /// </summary>
         [Display(Order = -500)]
-        public string Subject { get; set; }
+        public string Subject { get; set; } = string.Empty;
 
         public EmailMessage()
         {
