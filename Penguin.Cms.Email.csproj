@@ -9,9 +9,9 @@
     <RootNamespace>Penguin.Cms.Email</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="1.0.1-T9MJL4F" />
-    <PackageReference Include="Penguin.Cms.Abstractions" Version="1.0.1-T9MJL4F" />
-    <PackageReference Include="Penguin.Cms.Files" Version="2.0.3-T9MNBFG" />
-    <PackageReference Include="Penguin.Email" Version="1.0.1-T9PMIQP" />
+    <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="1.0.1-T9QC72V" />
+    <PackageReference Include="Penguin.Cms.Abstractions" Version="1.0.1-T9QC72V" />
+    <PackageReference Include="Penguin.Cms.Files" Version="2.0.3-T9QC72V" />
+    <PackageReference Include="Penguin.Email" Version="1.0.1-T9QC72V" />
   </ItemGroup>
 </Project>
