@@ -26,7 +26,7 @@ namespace Penguin.Cms.Email
         [DontAllow(DisplayContexts.Any)]
         public List<DatabaseFile> Attachments { get; } = new List<DatabaseFile>();
 
-        IEnumerable<IFile> IEmailMessage.Attachments => Attachments;
+        IEnumerable<IFile> IEmailMessage.Attachments => this.Attachments;
 
         IEnumerable<string> IEmailMessage.BCCRecipients => this.GetBCCRecipients();
 
