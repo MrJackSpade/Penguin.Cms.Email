@@ -68,6 +68,7 @@
             <summary>
             Adds a file as an attachment to the message, persists it as a database file
             </summary>
+            <param name="source">The target email message</param>
             <param name="filePath">The path of the file to add</param>
             <param name="fileName">The name to give the attachment</param>
         </member>
@@ -75,6 +76,7 @@
             <summary>
             Adds a file as an attachment to the message, persists it as a database file
             </summary>
+            <param name="source">The target email message</param>
             <param name="bytes">A byte[] representing the file contents</param>
             <param name="fileName">The name to give the attachment</param>
         </member>
@@ -82,6 +84,7 @@
             <summary>
             Adds an existing database file as an attachment to the message
             </summary>
+            <param name="source">The target email message</param>
             <param name="db">The database file to add as an attachment</param>
         </member>
         <member name="T:Penguin.Cms.Email.Services.EmailService">
@@ -100,7 +103,6 @@
             </summary>
             <param name="emailRepository">The IRepository implementation to be used when persisting the message</param>
             <param name="configurationProvider">A Configuration provider to use to retrieve email message configurations</param>
-            <param name="messageBus">An optonal message bus to be used for publishing email related messages</param>
         </member>
         <member name="M:Penguin.Cms.Email.Services.EmailService.Queue(Penguin.Cms.Email.EmailMessage)">
             <summary>

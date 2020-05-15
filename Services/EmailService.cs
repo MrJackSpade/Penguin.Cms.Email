@@ -24,7 +24,6 @@ namespace Penguin.Cms.Email.Services
         /// </summary>
         /// <param name="emailRepository">The IRepository implementation to be used when persisting the message</param>
         /// <param name="configurationProvider">A Configuration provider to use to retrieve email message configurations</param>
-        /// <param name="messageBus">An optonal message bus to be used for publishing email related messages</param>
         public EmailService(IRepository<EmailMessage> emailRepository, IProvideConfigurations configurationProvider) : base(configurationProvider)
         {
             this.EmailRepository = emailRepository;
