@@ -100,6 +100,11 @@ namespace Penguin.Cms.Email
 
         public EmailMessage(IEmailMessage message)
         {
+            if (message is null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             this.Attachments = message.Attachments.OfType<DatabaseFile>().ToList();
 
             this.AddBCCRecipients(message.BCCRecipients.ToArray());
