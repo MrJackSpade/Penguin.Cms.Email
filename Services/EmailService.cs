@@ -83,7 +83,7 @@ namespace Penguin.Cms.Email.Services
             this.Queue(this.CopyMessage(message, newRecipient));
         }
 
-        void IQueueMail.ReQueue(IEmailMessage message, string newRecipient = null)
+        void IQueueMail.ReQueue(IEmailMessage message, string newRecipient)
         {
             this.ReQueue(this.EnsureEntity(message), newRecipient);
         }
@@ -98,7 +98,7 @@ namespace Penguin.Cms.Email.Services
             this.QueueAndSend(this.CopyMessage(message, newRecipient, EmailMessageState.Success));
         }
 
-        void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient = null)
+        void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient)
         {
             this.ReQueueAndSend(this.EnsureEntity(message), newRecipient);
         }
