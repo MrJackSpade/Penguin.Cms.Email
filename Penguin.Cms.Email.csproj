@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="5.0.2-TA9KKLU" />
     <PackageReference Include="Penguin.Email" Version="5.0.2-TA9KKLU" />
-    <PackageReference Include="Penguin.Cms.Abstractions" Version="5.0.2-TAA4YFP" />
-    <PackageReference Include="Penguin.Cms.Files" Version="5.0.2-TAA4YFP" />
+    <PackageReference Include="Penguin.Cms.Abstractions" Version="5.0.2-TABDXT3" />
+    <PackageReference Include="Penguin.Cms.Files" Version="5.0.2-TABDXT3" />
   </ItemGroup>
 </Project>
