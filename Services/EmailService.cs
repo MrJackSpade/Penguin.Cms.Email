@@ -40,7 +40,7 @@ namespace Penguin.Cms.Email.Services
 
         void IQueueMail.Queue(IEmailMessage message)
         {
-            this.Queue(this.EnsureEntity(message));
+            this.Queue(EnsureEntity(message));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Penguin.Cms.Email.Services
 
         void IQueueAndSendMail.QueueAndSend(IEmailMessage message)
         {
-            this.QueueAndSend(this.EnsureEntity(message));
+            this.QueueAndSend(EnsureEntity(message));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Penguin.Cms.Email.Services
 
         void IQueueAndSendMail.QueueOrSend(IEmailMessage message)
         {
-            this.QueueOrSend(this.EnsureEntity(message));
+            this.QueueOrSend(EnsureEntity(message));
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Penguin.Cms.Email.Services
 
         void IQueueMail.ReQueue(IEmailMessage message, string newRecipient)
         {
-            this.ReQueue(this.EnsureEntity(message), newRecipient);
+            this.ReQueue(EnsureEntity(message), newRecipient);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Penguin.Cms.Email.Services
 
         void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient)
         {
-            this.ReQueueAndSend(this.EnsureEntity(message), newRecipient);
+            this.ReQueueAndSend(EnsureEntity(message), newRecipient);
         }
 
         private EmailMessage CopyMessage(EmailMessage message, string newRecipient = null, EmailMessageState state = EmailMessageState.Unsent)
@@ -117,16 +117,6 @@ namespace Penguin.Cms.Email.Services
             return toReturn;
         }
 
-        private EmailMessage EnsureEntity(IEmailMessage source)
-        {
-            if (source is EmailMessage e)
-            {
-                return e;
-            }
-            else
-            {
-                return new EmailMessage(source);
-            }
-        }
+        private static EmailMessage EnsureEntity(IEmailMessage source) => source as EmailMessage ?? new EmailMessage(source);
     }
 }
