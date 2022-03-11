@@ -10,9 +10,9 @@
     <DocumentationFile>Penguin.Cms.Email.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="5.0.6-TAHULSY" />
-    <PackageReference Include="Penguin.Email" Version="5.0.6-TAHULSY" />
-    <PackageReference Include="Penguin.Cms.Abstractions" Version="5.0.6-TAHULSY" />
-    <PackageReference Include="Penguin.Cms.Files" Version="5.0.6-TAHULSY" />
+    <PackageReference Include="Penguin.Email" Version="5.0.6-TATDFB4" />
+    <PackageReference Include="Penguin.Cms.Abstractions" Version="5.0.6-TATDFB4" />
+    <PackageReference Include="Penguin.Cms.Files" Version="5.0.6-TATDFB4" />
+    <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="5.0.6-TATDFB4" />
   </ItemGroup>
 </Project>
