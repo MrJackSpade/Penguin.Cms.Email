@@ -33,15 +33,9 @@ namespace Penguin.Cms.Email.Services
         /// Queues a new email message by adding it to the IRepository implementation with the intent of being sent later by a worker
         /// </summary>
         /// <param name="message">The message to queue</param>
-        public void Queue(EmailMessage message)
-        {
-            this.EmailRepository.AddOrUpdate(message);
-        }
+        public void Queue(EmailMessage message) => this.EmailRepository.AddOrUpdate(message);
 
-        void IQueueMail.Queue(IEmailMessage message)
-        {
-            this.Queue(EnsureEntity(message));
-        }
+        void IQueueMail.Queue(IEmailMessage message) => this.Queue(EnsureEntity(message));
 
         /// <summary>
         /// Persists the email message to the IRepository implementation and attempts to send it immediately bypassing any queue
@@ -54,54 +48,33 @@ namespace Penguin.Cms.Email.Services
             this.Send(message);
         }
 
-        void IQueueAndSendMail.QueueAndSend(IEmailMessage message)
-        {
-            this.QueueAndSend(EnsureEntity(message));
-        }
+        void IQueueAndSendMail.QueueAndSend(IEmailMessage message) => this.QueueAndSend(EnsureEntity(message));
 
         /// <summary>
         /// Calls Queue as the default
         /// </summary>
         /// <param name="message">Queues the message</param>
-        public void QueueOrSend(EmailMessage message)
-        {
-            this.Queue(message);
-        }
+        public void QueueOrSend(EmailMessage message) => this.Queue(message);
 
-        void IQueueAndSendMail.QueueOrSend(IEmailMessage message)
-        {
-            this.QueueOrSend(EnsureEntity(message));
-        }
+        void IQueueAndSendMail.QueueOrSend(IEmailMessage message) => this.QueueOrSend(EnsureEntity(message));
 
         /// <summary>
         /// Copies the provided message and requeues it with an optional new recipient
         /// </summary>
         /// <param name="message">The message to copy</param>
         /// <param name="newRecipient">If not null, the value will replace the former recipient</param>
-        public void ReQueue(EmailMessage message, string newRecipient = null)
-        {
-            this.Queue(this.CopyMessage(message, newRecipient));
-        }
+        public void ReQueue(EmailMessage message, string newRecipient = null) => this.Queue(this.CopyMessage(message, newRecipient));
 
-        void IQueueMail.ReQueue(IEmailMessage message, string newRecipient)
-        {
-            this.ReQueue(EnsureEntity(message), newRecipient);
-        }
+        void IQueueMail.ReQueue(IEmailMessage message, string newRecipient) => this.ReQueue(EnsureEntity(message), newRecipient);
 
         /// <summary>
         /// Copies the provided message and requeues it with an optional new recipient, marks it sent, and then immediately sends it
         /// </summary>
         /// <param name="message">The message to copy</param>
         /// <param name="newRecipient">If not null, the value will replace the former recipient</param>
-        public void ReQueueAndSend(EmailMessage message, string newRecipient = null)
-        {
-            this.QueueAndSend(this.CopyMessage(message, newRecipient, EmailMessageState.Success));
-        }
+        public void ReQueueAndSend(EmailMessage message, string newRecipient = null) => this.QueueAndSend(this.CopyMessage(message, newRecipient, EmailMessageState.Success));
 
-        void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient)
-        {
-            this.ReQueueAndSend(EnsureEntity(message), newRecipient);
-        }
+        void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient) => this.ReQueueAndSend(EnsureEntity(message), newRecipient);
 
         private EmailMessage CopyMessage(EmailMessage message, string newRecipient = null, EmailMessageState state = EmailMessageState.Unsent)
         {
