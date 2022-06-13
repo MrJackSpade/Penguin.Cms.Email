@@ -2,7 +2,7 @@
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
-    <PackageProjectUrl>https://github.com/PenguinCms/Penguin.Cms.Email</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/PenguinCMS/Penguin.Cms.Email</PackageProjectUrl>
     <Version>5.0.5</Version>
     <Description>Not Available</Description>
     <AssemblyName>Penguin.Cms.Email</AssemblyName>
@@ -10,9 +10,9 @@
     <DocumentationFile>Penguin.Cms.Email.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Email" Version="5.0.6-TAX9354" />
-    <PackageReference Include="Penguin.Cms.Abstractions" Version="5.0.6-TAX9354" />
-    <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="5.0.6-TAX9354" />
-    <PackageReference Include="Penguin.Cms.Files" Version="5.0.6-TAX9354" />
+    <PackageReference Include="Penguin.Email" Version="5.0.6-TAZCES9" />
+    <PackageReference Include="Penguin.Cms.Abstractions" Version="5.0.6-TAZCES9" />
+    <PackageReference Include="Penguin.Cms.Email.Abstractions" Version="5.0.6-TAZCES9" />
+    <PackageReference Include="Penguin.Cms.Files" Version="5.0.6-TAZCES9" />
   </ItemGroup>
 </Project>
