@@ -26,7 +26,7 @@ namespace Penguin.Cms.Email.Services
         /// <param name="configurationProvider">A Configuration provider to use to retrieve email message configurations</param>
         public EmailService(IRepository<EmailMessage> emailRepository, IProvideConfigurations configurationProvider) : base(configurationProvider)
         {
-            this.EmailRepository = emailRepository;
+            EmailRepository = emailRepository;
         }
 
         /// <summary>
@@ -35,12 +35,12 @@ namespace Penguin.Cms.Email.Services
         /// <param name="message">The message to queue</param>
         public void Queue(EmailMessage message)
         {
-            this.EmailRepository.AddOrUpdate(message);
+            EmailRepository.AddOrUpdate(message);
         }
 
         void IQueueMail.Queue(IEmailMessage message)
         {
-            this.Queue(EnsureEntity(message));
+            Queue(EnsureEntity(message));
         }
 
         /// <summary>
@@ -49,14 +49,14 @@ namespace Penguin.Cms.Email.Services
         /// <param name="message">The message to send/persist</param>
         public void QueueAndSend(EmailMessage message)
         {
-            this.EmailRepository.AddOrUpdate(message);
+            EmailRepository.AddOrUpdate(message);
 
-            this.Send(message);
+            Send(message);
         }
 
         void IQueueAndSendMail.QueueAndSend(IEmailMessage message)
         {
-            this.QueueAndSend(EnsureEntity(message));
+            QueueAndSend(EnsureEntity(message));
         }
 
         /// <summary>
@@ -65,12 +65,12 @@ namespace Penguin.Cms.Email.Services
         /// <param name="message">Queues the message</param>
         public void QueueOrSend(EmailMessage message)
         {
-            this.Queue(message);
+            Queue(message);
         }
 
         void IQueueAndSendMail.QueueOrSend(IEmailMessage message)
         {
-            this.QueueOrSend(EnsureEntity(message));
+            QueueOrSend(EnsureEntity(message));
         }
 
         /// <summary>
@@ -80,12 +80,12 @@ namespace Penguin.Cms.Email.Services
         /// <param name="newRecipient">If not null, the value will replace the former recipient</param>
         public void ReQueue(EmailMessage message, string newRecipient = null)
         {
-            this.Queue(this.CopyMessage(message, newRecipient));
+            Queue(CopyMessage(message, newRecipient));
         }
 
         void IQueueMail.ReQueue(IEmailMessage message, string newRecipient)
         {
-            this.ReQueue(EnsureEntity(message), newRecipient);
+            ReQueue(EnsureEntity(message), newRecipient);
         }
 
         /// <summary>
@@ -95,17 +95,17 @@ namespace Penguin.Cms.Email.Services
         /// <param name="newRecipient">If not null, the value will replace the former recipient</param>
         public void ReQueueAndSend(EmailMessage message, string newRecipient = null)
         {
-            this.QueueAndSend(this.CopyMessage(message, newRecipient, EmailMessageState.Success));
+            QueueAndSend(CopyMessage(message, newRecipient, EmailMessageState.Success));
         }
 
         void IQueueAndSendMail.ReQueueAndSend(IEmailMessage message, string newRecipient)
         {
-            this.ReQueueAndSend(EnsureEntity(message), newRecipient);
+            ReQueueAndSend(EnsureEntity(message), newRecipient);
         }
 
         private EmailMessage CopyMessage(EmailMessage message, string newRecipient = null, EmailMessageState state = EmailMessageState.Unsent)
         {
-            EmailMessage toReturn = this.EmailRepository.ShallowClone(message);
+            EmailMessage toReturn = EmailRepository.ShallowClone(message);
 
             toReturn.State = state;
 

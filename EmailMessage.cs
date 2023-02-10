@@ -26,7 +26,7 @@ namespace Penguin.Cms.Email
         [DontAllow(DisplayContexts.Any)]
         public List<DatabaseFile> Attachments { get; } = new List<DatabaseFile>();
 
-        IEnumerable<IFile> IEmailMessage.Attachments => this.Attachments;
+        IEnumerable<IFile> IEmailMessage.Attachments => Attachments;
 
         IEnumerable<string> IEmailMessage.BCCRecipients => this.GetBCCRecipients();
 
@@ -105,16 +105,16 @@ namespace Penguin.Cms.Email
                 throw new ArgumentNullException(nameof(message));
             }
 
-            this.Attachments = message.Attachments.OfType<DatabaseFile>().ToList();
+            Attachments = message.Attachments.OfType<DatabaseFile>().ToList();
 
             this.AddBCCRecipients(message.BCCRecipients.ToArray());
             this.AddCCRecipients(message.CCRecipients.ToArray());
             this.AddRecipients(message.Recipients.ToArray());
 
-            this.Body = message.Body;
-            this.From = message.From;
-            this.IsHtml = message.IsHtml;
-            this.Subject = message.Subject;
+            Body = message.Body;
+            From = message.From;
+            IsHtml = message.IsHtml;
+            Subject = message.Subject;
         }
     }
 }
